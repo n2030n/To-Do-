@@ -52,8 +52,6 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
         viewHolder.isDeleted.setOnClickListener{
             updateAndDelete.onItemDelete(UID)
         }
-
-
         return view
     }
 
@@ -63,6 +61,5 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
         val isDeleted: ImageButton = row!!.findViewById(R.id.close) as ImageButton
 
     }
-
 }
 

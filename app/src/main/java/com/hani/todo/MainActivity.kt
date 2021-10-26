@@ -1,16 +1,16 @@
 package com.hani.todo
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.service.controls.actions.FloatAction
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
-
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class MainActivity : AppCompatActivity() , UpdateAndDelete {
@@ -23,6 +23,16 @@ class MainActivity : AppCompatActivity() , UpdateAndDelete {
     private lateinit var fab: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val cal = Calendar.getInstance()
+        val day = cal.get(Calendar.DAY_OF_MONTH)
+        val month = cal.get(Calendar.MONTH)
+        val year = cal.get(Calendar.YEAR)
+        val birthday = "$day/$month/$year"
+
+
+
+        getSupportActionBar()?.hide()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -31,6 +41,8 @@ class MainActivity : AppCompatActivity() , UpdateAndDelete {
         listViewItem = findViewById(R.id.item_listView)
 
         fab.setOnClickListener { view ->
+
+
             val alertDialog = AlertDialog.Builder(this)
             val textEditText = EditText(this)
             alertDialog.setMessage("Add ToDo item")
@@ -40,6 +52,7 @@ class MainActivity : AppCompatActivity() , UpdateAndDelete {
                 val todoItemData = ToDoModel.createList()
                 todoItemData.itemDataText = textEditText.text.toString()
                 todoItemData.done = false
+
 
                 val newItemData = database.child("todo").push()
                 todoItemData.UID = newItemData.key
