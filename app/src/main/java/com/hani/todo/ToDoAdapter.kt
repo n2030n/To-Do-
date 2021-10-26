@@ -59,7 +59,6 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
         val textLabel: TextView = row!!.findViewById(R.id.item_textView) as TextView
         val isDone: CheckBox = row!!.findViewById(R.id.checkBox) as CheckBox
         val isDeleted: ImageButton = row!!.findViewById(R.id.close) as ImageButton
-
     }
 }
 

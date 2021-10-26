@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -13,7 +14,7 @@ import java.util.*
 import kotlin.collections.HashMap
 
 
-class MainActivity : AppCompatActivity() , UpdateAndDelete {
+class MainActivity : AppCompatActivity(), UpdateAndDelete {
 
 
     lateinit var database: DatabaseReference
@@ -23,13 +24,6 @@ class MainActivity : AppCompatActivity() , UpdateAndDelete {
     private lateinit var fab: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        val cal = Calendar.getInstance()
-        val day = cal.get(Calendar.DAY_OF_MONTH)
-        val month = cal.get(Calendar.MONTH)
-        val year = cal.get(Calendar.YEAR)
-        val birthday = "$day/$month/$year"
-
 
 
         getSupportActionBar()?.hide()
@@ -48,6 +42,23 @@ class MainActivity : AppCompatActivity() , UpdateAndDelete {
             alertDialog.setMessage("Add ToDo item")
             alertDialog.setTitle("Enter ToDo item")
             alertDialog.setView(textEditText)
+            alertDialog.setNeutralButton("Pick Date") { dialog, i ->
+                val cal = Calendar.getInstance()
+                val day = cal.get(Calendar.DAY_OF_MONTH)
+                val month = cal.get(Calendar.MONTH)
+                val year = cal.get(Calendar.YEAR)
+                var birthday: String = "$day/$month/$year"
+
+                DatePickerDialog(
+                    this,
+                    DatePickerDialog.OnDateSetListener { view, year, month, day ->
+                        birthday = "$day/$month/$year"
+                    },
+                    year,
+                    month,
+                    day
+                ).show()
+            }
             alertDialog.setPositiveButton("Add") { dialog, i ->
                 val todoItemData = ToDoModel.createList()
                 todoItemData.itemDataText = textEditText.text.toString()
@@ -56,6 +67,8 @@ class MainActivity : AppCompatActivity() , UpdateAndDelete {
 
                 val newItemData = database.child("todo").push()
                 todoItemData.UID = newItemData.key
+
+
 
                 newItemData.setValue(todoItemData)
 
@@ -88,7 +101,7 @@ class MainActivity : AppCompatActivity() , UpdateAndDelete {
             val toDoIndexedValue = items.next()
             val itemsIterator = toDoIndexedValue.children.iterator()
 
-            while(itemsIterator.hasNext()){
+            while (itemsIterator.hasNext()) {
                 val currentItem = itemsIterator.next()
                 val toDoitemDate = ToDoModel.createList()
                 val map = currentItem.getValue() as HashMap<String, Any>
