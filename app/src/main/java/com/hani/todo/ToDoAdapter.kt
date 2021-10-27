@@ -29,6 +29,7 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View? {
         val UID: String = itemList.get(p0).UID as String
         val itemTextData = itemList.get(p0).itemDataText as String
+        val dueDate : String = itemList.get(p0).dueDate as String
         val done: Boolean = itemList.get(p0).done as Boolean
 
         val view: View
@@ -43,13 +44,14 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
             viewHolder = view.tag as ListViewHolder
         }
         viewHolder.textLabel.text = itemTextData
+        viewHolder.dueDate.text = selectedDueDate
         viewHolder.isDone.isChecked = done
 
         viewHolder.isDone.setOnClickListener {
             updateAndDelete.modefyItem(UID, !done)
         }
 
-        viewHolder.isDeleted.setOnClickListener{
+        viewHolder.isDeleted.setOnClickListener {
             updateAndDelete.onItemDelete(UID)
         }
         return view
@@ -57,6 +59,7 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
 
     private class ListViewHolder(row: View?) {
         val textLabel: TextView = row!!.findViewById(R.id.item_textView) as TextView
+        val dueDate: TextView = row!!.findViewById(R.id.dueDate) as TextView
         val isDone: CheckBox = row!!.findViewById(R.id.checkBox) as CheckBox
         val isDeleted: ImageButton = row!!.findViewById(R.id.close) as ImageButton
     }

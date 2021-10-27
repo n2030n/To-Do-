@@ -3,15 +3,17 @@ package com.hani.todo
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 import java.util.*
 import kotlin.collections.HashMap
+
+  lateinit var selectedDueDate: String
 
 
 class MainActivity : AppCompatActivity(), UpdateAndDelete {
@@ -22,6 +24,8 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
     lateinit var adapter: ToDoAdapter
     private var listViewItem: ListView? = null
     private lateinit var fab: FloatingActionButton
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -42,17 +46,17 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
             alertDialog.setMessage("Add ToDo item")
             alertDialog.setTitle("Enter ToDo item")
             alertDialog.setView(textEditText)
-            alertDialog.setNeutralButton("Pick Date") { dialog, i ->
+            alertDialog.setNegativeButton("Pick Date") { dialog, i ->
                 val cal = Calendar.getInstance()
                 val day = cal.get(Calendar.DAY_OF_MONTH)
                 val month = cal.get(Calendar.MONTH)
                 val year = cal.get(Calendar.YEAR)
-                var birthday: String = "$day/$month/$year"
+                selectedDueDate = "$day/$month/$year"
 
                 DatePickerDialog(
                     this,
                     DatePickerDialog.OnDateSetListener { view, year, month, day ->
-                        birthday = "$day/$month/$year"
+                        selectedDueDate = "$day/$month/$year"
                     },
                     year,
                     month,
@@ -62,6 +66,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
             alertDialog.setPositiveButton("Add") { dialog, i ->
                 val todoItemData = ToDoModel.createList()
                 todoItemData.itemDataText = textEditText.text.toString()
+                todoItemData.dueDate = selectedDueDate
                 todoItemData.done = false
 
 
@@ -109,6 +114,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
                 toDoitemDate.UID = currentItem.key
                 toDoitemDate.done = map.get("done") as Boolean?
                 toDoitemDate.itemDataText = map.get("itemDataText") as String?
+                toDoitemDate.dueDate = map.get("dueDate") as String?
                 toDoList!!.add(toDoitemDate)
             }
         }
@@ -118,6 +124,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
     override fun modefyItem(itemUID: String, isDone: Boolean) {
         val itemReference = database.child("todo").child(itemUID)
         itemReference.child("done").setValue(isDone)
+        itemReference.child("dueDate").setValue(selectedDueDate)
     }
 
     override fun onItemDelete(itemUID: String) {
