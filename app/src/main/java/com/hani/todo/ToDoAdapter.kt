@@ -8,8 +8,14 @@ import android.widget.BaseAdapter
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdapter() {
+
+
+
+
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var itemList = toDoList
     private var updateAndDelete: UpdateAndDelete = context as UpdateAndDelete
@@ -29,6 +35,7 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View? {
         val UID: String = itemList.get(p0).UID as String
         val taskTitle = itemList.get(p0).taskTitle as String
+        val creationDate = itemList.get(p0).creationDate as String
         val dueDate : String = itemList.get(p0).dueDate as String
         val done: Boolean = itemList.get(p0).done as Boolean
 
@@ -43,7 +50,8 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
             view = p1
             viewHolder = view.tag as ListViewHolder
         }
-        viewHolder.textLabel.text = taskTitle
+        viewHolder.taskTitle.text = taskTitle
+        viewHolder.creationDate.text = creationDate
         viewHolder.dueDate.text = dueDate
         viewHolder.isDone.isChecked = done
 
@@ -58,7 +66,8 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
     }
 
     private class ListViewHolder(row: View?) {
-        val textLabel: TextView = row!!.findViewById(R.id.item_textView) as TextView
+        val taskTitle: TextView = row!!.findViewById(R.id.item_textView) as TextView
+        val creationDate: TextView = row!!.findViewById(R.id.creationDate) as TextView
         val dueDate: TextView = row!!.findViewById(R.id.dueDate) as TextView
         val isDone: CheckBox = row!!.findViewById(R.id.checkBox) as CheckBox
         val isDeleted: ImageButton = row!!.findViewById(R.id.close) as ImageButton

@@ -18,8 +18,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
     // Creating the current date and store it in creationDate
     val current = LocalDateTime.now()
     val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-    val creationDate = current.format(formatter)
-
+    val creationDateFormatted = current.format(formatter)
 
     //due date
     val myCalendar = Calendar.getInstance()
@@ -40,6 +39,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        val itemDesign = LayoutInflater.from(this).inflate(R.layout.row_itemlayout, null)
 
         getSupportActionBar()?.hide()
         super.onCreate(savedInstanceState)
@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
         fab.setOnClickListener {
             //Inflate the dialog with custom view
             val addTaskDialog = LayoutInflater.from(this).inflate(R.layout.add_task_dialog, null)
+
 
             val dialogAddBtn = addTaskDialog.findViewById<Button>(R.id.addBtn)
             val dialogCancelBtn = addTaskDialog.findViewById<Button>(R.id.cancelBtn)
@@ -90,6 +91,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
 
                 val todoItemData = ToDoModel.createList()
                 todoItemData.taskTitle = taskTitleET.text.toString()
+                todoItemData.creationDate = creationDateFormatted
                 todoItemData.dueDate = dueDate
                 todoItemData.done = false
 
@@ -151,6 +153,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
                 toDoitemDate.UID = currentItem.key
                 toDoitemDate.done = map.get("done") as Boolean?
                 toDoitemDate.taskTitle = map.get("taskTitle") as String?
+                toDoitemDate.creationDate = map.get("creationDate") as String?
                 toDoitemDate.dueDate = map.get("dueDate") as String?
                 toDoList!!.add(toDoitemDate)
             }
