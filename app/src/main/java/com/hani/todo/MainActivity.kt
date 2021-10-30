@@ -13,24 +13,19 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.HashMap
 
-var currentDateAndTime = LocalDateTime.now()
-var formatTheDateAndTime = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-var currentDate = currentDateAndTime.format(formatTheDateAndTime)
-
-
 class MainActivity : AppCompatActivity(), UpdateAndDelete {
 
-    // Date
+    // Creating the current date and store it in creationDate
     val current = LocalDateTime.now()
     val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-    val formatted = current.format(formatter)
+    val creationDate = current.format(formatter)
 
 
     //due date
-    val c = Calendar.getInstance()
-    val day = c.get(Calendar.DAY_OF_MONTH)
-    val month = c.get(Calendar.MONTH)
-    val year = c.get(Calendar.YEAR)
+    val myCalendar = Calendar.getInstance()
+    val day = myCalendar.get(Calendar.DAY_OF_MONTH)
+    val month = myCalendar.get(Calendar.MONTH)
+    val year = myCalendar.get(Calendar.YEAR)
 
 
     private lateinit var dueDate: String
@@ -56,18 +51,18 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
 
         fab.setOnClickListener {
             //Inflate the dialog with custom view
-            val mDialogView = LayoutInflater.from(this).inflate(R.layout.add_task_dialog, null)
+            val addTaskDialog = LayoutInflater.from(this).inflate(R.layout.add_task_dialog, null)
 
-            val dialogAddBtn = mDialogView.findViewById<Button>(R.id.addBtn)
-            val dialogCancelBtn = mDialogView.findViewById<Button>(R.id.cancelBtn)
-            val taskTitleET = mDialogView.findViewById<EditText>(R.id.taskTitleET)
-            val taskDescriptionET = mDialogView.findViewById<EditText>(R.id.taskDescriptionET)
-            val dueDateTV = mDialogView.findViewById<TextView>(R.id.dueDateTV)
+            val dialogAddBtn = addTaskDialog.findViewById<Button>(R.id.addBtn)
+            val dialogCancelBtn = addTaskDialog.findViewById<Button>(R.id.cancelBtn)
+            val taskTitleET = addTaskDialog.findViewById<EditText>(R.id.taskTitleET)
+            val taskDescriptionET = addTaskDialog.findViewById<EditText>(R.id.taskDescriptionET)
+            val dueDateTV = addTaskDialog.findViewById<TextView>(R.id.dueDateTV)
 
 
             //AlertDialogBuilder
             val mBuilder = AlertDialog.Builder(this)
-                .setView(mDialogView)
+                .setView(addTaskDialog)
                 .setTitle("Add Task")
 
             dueDateTV.setOnClickListener {
@@ -81,7 +76,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
                     month,
                     day
                 )
-                datePickerDialog.datePicker.minDate = c.timeInMillis
+                datePickerDialog.datePicker.minDate = myCalendar.timeInMillis
                 datePickerDialog.show()
 
             }
@@ -174,108 +169,4 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
         itemReference.removeValue()
         adapter.notifyDataSetChanged()
     }
-
-//    fun addTaskDailog() {
-//        //Inflate the dialog with custom view
-//        val addTask = android.app.AlertDialog.Builder(view?.context)
-//        val myView: View = layoutInflater.inflate(R.layout.add_tasks, null)
-//
-//        addTask.setView(myView)
-//        addTask.setTitle("Add Task")
-//        val Save: Button = myView.findViewById(R.id.btnSave)
-//        val cancel: Button = myView.findViewById(R.id.btnCancel)
-//        val dateAlerAddTask: TextView = myView.findViewById(R.id.tvDateToday)
-//        dateAlerAddTask.setText("Date  $formatted")
-//
-//        var count = AppRepo.nextIdList
-//        ed_taksTitle = myView.findViewById(R.id.edtTitleTask)
-//        ed_taskDescription = myView.findViewById(R.id.edtDescription)
-//        calendarTask = myView.findViewById(R.id.id_calendar)
-//
-//
-//        calendarTask.setOnClickListener {
-//            val datePickerDialog = DatePickerDialog(
-//                requireView().context,
-//                DatePickerDialog.OnDateSetListener { view, y, m, d ->
-//                    dueDate = "$y/${m + 1}/$d"
-//                    calendarTask.setText(dueDate)
-//                },
-//                year,
-//                month,
-//                day
-//            )
-//            datePickerDialog.datePicker.minDate = c.timeInMillis
-//            datePickerDialog.show()
-//
-//        }
-//
-//
-//
-//
-//        Save.setOnClickListener {
-//
-//            if (ed_taksTitle.text.isNotEmpty()
-//                && calendarTask.text.isNotEmpty()
-//            ) {
-//                //delete...
-//                Toast.makeText(
-//                    context,
-//                    " Title task : ${ed_taksTitle.text}" + " \n Description ${ed_taskDescription.text} \n" + " $formatted \n Due Date $dueDate",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//
-//                //Insert to list var insertTask
-//                insertTask = DataTask(
-//                    count,
-//                    "${ed_taksTitle.text}",
-//                    "${ed_taskDescription.text}",
-//                    "$formatted",
-//                    "$dueDate",
-//                    false
-//                )
-//
-//                //mainViewModel.insertTask(insertTask)
-//
-//
-//                //to insert to database
-//                insertDateToDatabase(
-//                    mainViewModel,
-//                    ed_taksTitle.text.toString(),
-//                    ed_taskDescription.text.toString()
-//                )
-//
-//
-//
-//                mainViewModel.getAllTasks()
-//
-//
-//
-//
-//                //رتب الكود
-//                mainViewModel.getAllTasks().observe(viewLifecycleOwner,  {
-//                    rv_recyclerView.adapter=RecyclerAdapter(it,mainViewModel)})
-//                //search about notifyDataSetChanged
-//                rv_recyclerView.adapter?.notifyDataSetChanged()
-//
-//                //fun Clear
-//                clearEditText()
-//                count++
-//            } else {
-//                Toast.makeText(context, " Please Complete  ", Toast.LENGTH_SHORT).show()
-//            }
-//
-//
-//
-//
-//
-//
-//
-//        }
-//
-//        addTask.setNegativeButton(
-//            "Cancel",
-//            DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
-//        addTask.show()//.window?.setBackgroundDrawableResource(R.drawable.ic_launcher_foreground)
-//
-//    }
 }
