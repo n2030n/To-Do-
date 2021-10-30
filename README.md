@@ -11,7 +11,7 @@ My app is simple to do list with only one activity to hold the list and one frag
 2. task Description
 3. task Due Date
    the app will store these data in the Real time data base of the Firebase in addition to
-4. Boolean variable to chack if the task is done or not
+4. Boolean variable to check if the task is done or not
 5. Creation Date of the task
    ....
    The App also keeps track of the time of the task if it past the due date or not and the app has three color indacators around the border of any task
