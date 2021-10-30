@@ -44,7 +44,7 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
             viewHolder = view.tag as ListViewHolder
         }
         viewHolder.textLabel.text = itemTextData
-        viewHolder.dueDate.text = selectedDueDate
+        viewHolder.dueDate.text = dueDate
         viewHolder.isDone.isChecked = done
 
         viewHolder.isDone.setOnClickListener {

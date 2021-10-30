@@ -1,5 +1,6 @@
 package com.hani.todo
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,7 +16,6 @@ import kotlin.collections.HashMap
 var currentDateAndTime = LocalDateTime.now()
 var formatTheDateAndTime = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 var currentDate = currentDateAndTime.format(formatTheDateAndTime)
-var selectedDueDate = currentDate.toString()
 
 
 class MainActivity : AppCompatActivity(), UpdateAndDelete {
@@ -70,20 +70,50 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
                 .setView(mDialogView)
                 .setTitle("Login Form")
 
+            dueDateTV.setOnClickListener {
+                val datePickerDialog = DatePickerDialog( this,
+                    DatePickerDialog.OnDateSetListener { view, y, m, d ->
+                        dueDate = "$y/${m + 1}/$d"
+                        dueDateTV.setText(dueDate)
+                    },
+                    year,
+                    month,
+                    day
+                )
+                datePickerDialog.datePicker.minDate = c.timeInMillis
+                datePickerDialog.show()
+
+            }
+
+
 
             //show dialog
             val mAlertDialog = mBuilder.show()
             //login button click of custom layout
             dialogAddBtn.setOnClickListener {
-                //dismiss dialog
+
+
+                val todoItemData = ToDoModel.createList()
+                todoItemData.itemDataText = taskTitleET.text.toString()
+                todoItemData.dueDate = dueDate
+                todoItemData.done = false
+
+
+                val newItemData = database.child("todo").push()
+                todoItemData.UID = newItemData.key
+
+
+
+                newItemData.setValue(todoItemData)
+
+
+                Toast.makeText(this, "Item Saved", Toast.LENGTH_LONG).show()
+
                 mAlertDialog.dismiss()
-                //get text from EditTexts of custom layout
-                val name = taskTitleET.text.toString()
-                val email = taskDescriptionET.text.toString()
-                val password = dueDateTV.text.toString()
-                //set the input text in TextView
-                //mainInfoTv.setText("Name:"+ name +"\nEmail: "+ email +"\nPassword: "+ password)
+
             }
+
+
             //cancel button click of custom layout
             dialogCancelBtn.setOnClickListener {
                 //dismiss dialog
@@ -136,7 +166,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
     override fun modefyItem(itemUID: String, isDone: Boolean) {
         val itemReference = database.child("todo").child(itemUID)
         itemReference.child("done").setValue(isDone)
-        itemReference.child("dueDate").setValue(selectedDueDate)
+        itemReference.child("dueDate").setValue(dueDate)
     }
 
     override fun onItemDelete(itemUID: String) {
