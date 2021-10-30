@@ -71,7 +71,8 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
                 .setTitle("Login Form")
 
             dueDateTV.setOnClickListener {
-                val datePickerDialog = DatePickerDialog( this,
+                val datePickerDialog = DatePickerDialog(
+                    this,
                     DatePickerDialog.OnDateSetListener { view, y, m, d ->
                         dueDate = "$y/${m + 1}/$d"
                         dueDateTV.setText(dueDate)
@@ -84,7 +85,6 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
                 datePickerDialog.show()
 
             }
-
 
 
             //show dialog
@@ -166,7 +166,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
     override fun modefyItem(itemUID: String, isDone: Boolean) {
         val itemReference = database.child("todo").child(itemUID)
         itemReference.child("done").setValue(isDone)
-        itemReference.child("dueDate").setValue(dueDate)
+        //itemReference.child("dueDate").setValue(dueDate)
     }
 
     override fun onItemDelete(itemUID: String) {
