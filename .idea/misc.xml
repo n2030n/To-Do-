@@ -8,6 +8,8 @@
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.19537037037037036" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.19537037037037036" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/add_tasks.xml" value="0.1716485507246377" />
+        <entry key="app/src/main/res/layout/dialog_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/row_itemlayout.xml" value="0.1" />
       </map>
     </option>
