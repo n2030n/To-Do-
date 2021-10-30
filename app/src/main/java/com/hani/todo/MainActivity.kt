@@ -91,6 +91,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
 
                 val todoItemData = ToDoModel.createList()
                 todoItemData.taskTitle = taskTitleET.text.toString()
+                todoItemData.taskDiscription = taskDescriptionET.text.toString()
                 todoItemData.creationDate = creationDateFormatted
                 todoItemData.dueDate = dueDate
                 todoItemData.done = false
@@ -98,8 +99,6 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
 
                 val newItemData = database.child("todo").push()
                 todoItemData.UID = newItemData.key
-
-
 
                 newItemData.setValue(todoItemData)
 
@@ -119,9 +118,6 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
         }
 
 
-
-
-
         toDoList = mutableListOf<ToDoModel>()
         adapter = ToDoAdapter(this, toDoList!!)
         listViewItem!!.adapter = adapter
@@ -137,6 +133,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
                 addItemToList(snapshot)
             }
         })
+
     }
 
     private fun addItemToList(snapshot: DataSnapshot) {
@@ -153,6 +150,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
                 toDoitemDate.UID = currentItem.key
                 toDoitemDate.done = map.get("done") as Boolean?
                 toDoitemDate.taskTitle = map.get("taskTitle") as String?
+                toDoitemDate.taskDiscription = map.get("taskDescription") as String?
                 toDoitemDate.creationDate = map.get("creationDate") as String?
                 toDoitemDate.dueDate = map.get("dueDate") as String?
                 toDoList!!.add(toDoitemDate)
@@ -172,4 +170,6 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
         itemReference.removeValue()
         adapter.notifyDataSetChanged()
     }
+
+
 }

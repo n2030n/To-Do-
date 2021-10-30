@@ -5,10 +5,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.CheckBox
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import java.time.LocalDateTime
@@ -25,6 +22,7 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var itemList = toDoList
     private var updateAndDelete: UpdateAndDelete = context as UpdateAndDelete
+
 
     override fun getCount(): Int {
         return itemList.size
@@ -61,6 +59,8 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
         viewHolder.dueDate.text = dueDate
         viewHolder.isDone.isChecked = done
 
+
+
         if (done) {
             viewHolder.cardViewXML.setBackgroundColor(Color.parseColor("#90EE90"))
         } else {
@@ -72,6 +72,11 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
                 viewHolder.cardViewXML.setBackgroundColor(Color.parseColor("#00BFFF"))
             }
         }
+
+
+
+
+
 
 
         viewHolder.isDone.setOnClickListener {
@@ -94,5 +99,7 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
             row!!.findViewById(R.id.constraintLayout) as ConstraintLayout
         val cardViewXML: CardView = row!!.findViewById(R.id.card_view) as CardView
     }
+
+
 }
 
