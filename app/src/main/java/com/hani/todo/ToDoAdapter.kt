@@ -11,7 +11,6 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.RecyclerView
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -63,13 +62,14 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
         viewHolder.isDone.isChecked = done
 
         if (done) {
-            viewHolder.cardViewXML.setBackgroundColor(Color.GRAY)
+            val greenColor = Color.green(R.color.green)
+            viewHolder.constraintLayout.setBackgroundColor(greenColor)
         } else {
             if (dueDate < creationDateFormatted) {
-                viewHolder.cardViewXML.setBackgroundColor(Color.RED)
+                viewHolder.cardViewXML.setCardBackgroundColor(Color.RED)
                 viewHolder.isDone.isEnabled = false
             } else {
-                viewHolder.cardViewXML.setBackgroundColor(Color.WHITE)
+                viewHolder.constraintLayout.setBackgroundColor(Color.WHITE)
             }
         }
 
@@ -90,8 +90,9 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
         val dueDate: TextView = row!!.findViewById(R.id.dueDate) as TextView
         val isDone: CheckBox = row!!.findViewById(R.id.checkBox) as CheckBox
         val isDeleted: ImageButton = row!!.findViewById(R.id.close) as ImageButton
-        val cardViewXML: ConstraintLayout = row!!.findViewById(R.id.relativeLayout) as ConstraintLayout
-
+        val constraintLayout: ConstraintLayout =
+            row!!.findViewById(R.id.relativeLayout) as ConstraintLayout
+        val cardViewXML: CardView = row!!.findViewById(R.id.card_view) as CardView
     }
 }
 
