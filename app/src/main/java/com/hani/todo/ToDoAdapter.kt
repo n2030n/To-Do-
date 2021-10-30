@@ -28,7 +28,7 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
 
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View? {
         val UID: String = itemList.get(p0).UID as String
-        val itemTextData = itemList.get(p0).itemDataText as String
+        val itemTextData = itemList.get(p0).taskTitle as String
         val dueDate : String = itemList.get(p0).dueDate as String
         val done: Boolean = itemList.get(p0).done as Boolean
 

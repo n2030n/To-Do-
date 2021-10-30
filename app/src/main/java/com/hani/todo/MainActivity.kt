@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
             //AlertDialogBuilder
             val mBuilder = AlertDialog.Builder(this)
                 .setView(mDialogView)
-                .setTitle("Login Form")
+                .setTitle("Add Task")
 
             dueDateTV.setOnClickListener {
                 val datePickerDialog = DatePickerDialog(
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
 
 
                 val todoItemData = ToDoModel.createList()
-                todoItemData.itemDataText = taskTitleET.text.toString()
+                todoItemData.taskTitle = taskTitleET.text.toString()
                 todoItemData.dueDate = dueDate
                 todoItemData.done = false
 
@@ -155,7 +155,7 @@ class MainActivity : AppCompatActivity(), UpdateAndDelete {
 
                 toDoitemDate.UID = currentItem.key
                 toDoitemDate.done = map.get("done") as Boolean?
-                toDoitemDate.itemDataText = map.get("itemDataText") as String?
+                toDoitemDate.taskTitle = map.get("taskTitle") as String?
                 toDoitemDate.dueDate = map.get("dueDate") as String?
                 toDoList!!.add(toDoitemDate)
             }

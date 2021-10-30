@@ -30,8 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:gravity="center"
-        android:hint="Select Date"
-        android:inputType="textPassword" />
+        android:hint="Select Date" />
 
     <LinearLayout
         android:layout_width="match_parent"
