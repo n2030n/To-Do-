@@ -1,6 +1,7 @@
 package com.hani.todo
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,12 +9,18 @@ import android.widget.BaseAdapter
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdapter() {
 
-
+    // Creating the current date and store it in creationDate
+    val current = LocalDateTime.now()
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    val creationDateFormatted = current.format(formatter)
 
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -36,7 +43,7 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
         val UID: String = itemList.get(p0).UID as String
         val taskTitle = itemList.get(p0).taskTitle as String
         val creationDate = itemList.get(p0).creationDate as String
-        val dueDate : String = itemList.get(p0).dueDate as String
+        val dueDate: String = itemList.get(p0).dueDate as String
         val done: Boolean = itemList.get(p0).done as Boolean
 
         val view: View
@@ -55,6 +62,18 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
         viewHolder.dueDate.text = dueDate
         viewHolder.isDone.isChecked = done
 
+        if (done) {
+            viewHolder.cardViewXML.setBackgroundColor(Color.GRAY)
+        } else {
+            if (dueDate < creationDateFormatted) {
+                viewHolder.cardViewXML.setBackgroundColor(Color.RED)
+                viewHolder.isDone.isEnabled = false
+            } else {
+                viewHolder.cardViewXML.setBackgroundColor(Color.WHITE)
+            }
+        }
+
+
         viewHolder.isDone.setOnClickListener {
             updateAndDelete.modefyItem(UID, !done)
         }
@@ -71,6 +90,8 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
         val dueDate: TextView = row!!.findViewById(R.id.dueDate) as TextView
         val isDone: CheckBox = row!!.findViewById(R.id.checkBox) as CheckBox
         val isDeleted: ImageButton = row!!.findViewById(R.id.close) as ImageButton
+        val cardViewXML: ConstraintLayout = row!!.findViewById(R.id.relativeLayout) as ConstraintLayout
+
     }
 }
 

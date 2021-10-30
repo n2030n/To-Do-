@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../Library/Android/sdk/platforms/android-31/data/res/drawable/btn_dialog.xml" value="0.2111111111111111" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.19537037037037036" />
         <entry key="app/src/main/res/drawable/custom.xml" value="0.27395833333333336" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.19537037037037036" />
