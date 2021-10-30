@@ -11,76 +11,77 @@
     app:cardElevation="3dp"
     app:contentPadding="4dp">
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/relativeLayout"
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/item_textView"
-        app:layout_constraintStart_toStartOf="@+id/item_textView">
+        android:background="@drawable/customconstraint">
+
 
         <CheckBox
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="58dp"
             android:soundEffectsEnabled="true"
-            app:layout_constraintBottom_toBottomOf="@+id/creationDate"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/creationDate"
-            app:layout_constraintStart_toStartOf="parent" />
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/item_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="163dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginEnd="164dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginBottom="44dp"
             android:text="text"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="italic|bold"
+            app:layout_constraintBottom_toTopOf="@+id/creationDate"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/checkBox"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/creationDate"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="14dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="7dp"
             android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/dueDate"
             app:layout_constraintEnd_toStartOf="@+id/close"
             app:layout_constraintStart_toEndOf="@+id/checkBox"
             app:layout_constraintTop_toBottomOf="@+id/item_textView" />
 
         <TextView
             android:id="@+id/dueDate"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/creationDate"
-            app:layout_constraintStart_toStartOf="@+id/creationDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/creationDate" />
 
         <ImageButton
             android:id="@+id/close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="39dp"
             android:background="@android:color/transparent"
             android:src="@android:drawable/btn_dialog"
-            app:layout_constraintBottom_toTopOf="@+id/creationDate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/creationDate"
-            app:layout_constraintTop_toTopOf="@+id/creationDate" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

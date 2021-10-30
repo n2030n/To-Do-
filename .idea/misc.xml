@@ -6,12 +6,13 @@
         <entry key="../../Library/Android/sdk/platforms/android-31/data/res/drawable/btn_dialog.xml" value="0.2111111111111111" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.19537037037037036" />
         <entry key="app/src/main/res/drawable/custom.xml" value="0.27395833333333336" />
+        <entry key="app/src/main/res/drawable/customconstraint.xml" value="0.2564814814814815" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.19537037037037036" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.19537037037037036" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/add_tasks.xml" value="0.1716485507246377" />
         <entry key="app/src/main/res/layout/dialog_layout.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/row_itemlayout.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/row_itemlayout.xml" value="0.375" />
       </map>
     </option>
   </component>

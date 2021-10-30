@@ -91,7 +91,7 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
         val isDone: CheckBox = row!!.findViewById(R.id.checkBox) as CheckBox
         val isDeleted: ImageButton = row!!.findViewById(R.id.close) as ImageButton
         val constraintLayout: ConstraintLayout =
-            row!!.findViewById(R.id.relativeLayout) as ConstraintLayout
+            row!!.findViewById(R.id.constraintLayout) as ConstraintLayout
         val cardViewXML: CardView = row!!.findViewById(R.id.card_view) as CardView
     }
 }
