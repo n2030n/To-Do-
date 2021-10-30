@@ -62,14 +62,14 @@ class ToDoAdapter(context: Context, toDoList: MutableList<ToDoModel>) : BaseAdap
         viewHolder.isDone.isChecked = done
 
         if (done) {
-            val greenColor = Color.green(R.color.green)
-            viewHolder.constraintLayout.setBackgroundColor(greenColor)
+            viewHolder.cardViewXML.setBackgroundColor(Color.parseColor("#90EE90"))
         } else {
             if (dueDate < creationDateFormatted) {
-                viewHolder.cardViewXML.setCardBackgroundColor(Color.RED)
+                viewHolder.cardViewXML.setCardBackgroundColor(Color.parseColor("#F08080"))
                 viewHolder.isDone.isEnabled = false
             } else {
                 viewHolder.constraintLayout.setBackgroundColor(Color.WHITE)
+                viewHolder.cardViewXML.setBackgroundColor(Color.parseColor("#00BFFF"))
             }
         }
 
